@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f4f4f4;
+        margin: 0;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      input[type="text"], select {
+        padding: 10px;
+        font-size: 16px;
+      }
+      button {
+        padding: 10px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+    </style>
+</head>
+<body>
+    <h1>تسجيل الدخول</h1>
+    <form id="login-form">
+        <label for="username">اسم المستخدم:</label>
+        <input type="text" id="username" required>
+        <label for="color">اختر لونك:</label>
+        <select id="color" required>
+            <option value="#FF5733">أحمر</option>
+            <option value="#33FF57">أخضر</option>
+            <option value="#3357FF">أزرق</option>
+            <option value="#F0E130">أصفر</option>
+            <option value="#FF33A1">وردي</option>
+        </select>
+        <button type="submit">تسجيل الدخول</button>
+    </form>
+
+    <script>
+      document.getElementById('login-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const username = document.getElementById('username').value;
+        const color = document.getElementById('color').value;
+        if (username.trim() !== '' && color) {
+          const userColors = JSON.parse(localStorage.getItem('userColors')) || {};
+          userColors[username] = color;
+          localStorage.setItem('userColors', JSON.stringify(userColors));
+          localStorage.setItem('username', username);
+          window.location.href = 'chat.html';
+        }
+      });
+    </script>
+
+</body></html>
